@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router";
 import { dummyProfileData } from "../assets/assets";
 import {
-  CalendarSearchIcon,
+  CalendarIcon,
   ChevronRightIcon,
   DollarSignIcon,
   FileTextIcon,
@@ -19,13 +19,13 @@ const Sidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const userName = dummyProfileData.firstName + " " + dummyProfileData.lastName;
-  const role = "ADMIN";
+  const role = "EMPLOYEE";
 
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutGridIcon },
     role === "ADMIN"
       ? { name: "Employees", href: "/employees", icon: UserIcon }
-      : { name: "Attendance", href: "/attendance", icon: CalendarSearchIcon },
+      : { name: "Attendance", href: "/attendance", icon: CalendarIcon },
     { name: "Leave", href: "/leave", icon: FileTextIcon },
     { name: "Payslips", href: "/payslips", icon: DollarSignIcon },
     { name: "Settings", href: "/settings", icon: SettingsIcon },
