@@ -12,6 +12,29 @@ const LoginForm = ({ role, title, subtitle }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setError("");
+    setLoading(true);
+
+    try {
+      // 🔥 Fake API simulation (replace with real API)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // ✅ Basic validation
+      if (!email || !password) {
+        throw new Error("All fields are required");
+      }
+
+      // ✅ Role-based logic (now role is used)
+      console.log("Login Data:", { email, password, role });
+
+      // 👉 Example success
+      alert(`${role} login successful`);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -22,7 +45,7 @@ const LoginForm = ({ role, title, subtitle }) => {
         <div className="w-full max-w-md animate-fade-in">
           <Link
             to="/login"
-            className="inline-flex items-center gap-2 text-slate-400 hover:text=slate-700 text-sm mb-10 transition-colors"
+            className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-700 text-sm mb-10 transition-colors"
           >
             <ArrowLeftIcon size={16} /> Back to portals
           </Link>
@@ -54,6 +77,7 @@ const LoginForm = ({ role, title, subtitle }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="admin@gmail.com"
+                className="w-full px-4 py-2.5 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
@@ -64,9 +88,10 @@ const LoginForm = ({ role, title, subtitle }) => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="pr-11"
+                  className="w-full px-4 py-2.5 border border-slate-300 rounded-md pr-11 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="•••••••••"
                 />
 
@@ -89,8 +114,8 @@ const LoginForm = ({ role, title, subtitle }) => {
               disabled={loading}
               className="w-full py-3 bg-linear-to-r from-indigo-600 to-indigo-500 text-white rounded-md text-sm font-semibold hover:from-indigo-700 hover:to-indigo-600 disabled:opacity-50 transition-all duration-200 shadow-lg shadow-indigo-500/25 active:scale-[0.98] flex items-center justify-center"
             >
-              {loading && <LoaderIcon className="animate-spin h-4 w-4  mr-2" />}
-              Sign In
+              {loading && <LoaderIcon className="animate-spin h-4 w-4 mr-2" />}
+              {loading ? "Signing In..." : "Sign In"}
             </button>
           </form>
         </div>

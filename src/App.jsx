@@ -10,12 +10,15 @@ import Payslips from "./pages/Payslips";
 import Settings from "./pages/Settings";
 import PrintPayslips from "./pages/PrintPayslips";
 import LoginForm from "./components/LoginForm";
+import NotFound from "./pages/NotFound";
+import ServerError from "./pages/ServerError";
 
 const App = () => {
   return (
     <>
       <Toaster />
       <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginLanding />} />
 
         <Route
@@ -49,7 +52,8 @@ const App = () => {
         </Route>
         <Route path="/print/payslips/:id" element={<PrintPayslips />} />
 
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/503" element={<ServerError />} />
       </Routes>
     </>
   );
